@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Felices 4 meses mi vida</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: darkred;
+            overflow: hidden;
+        }
+        .envelope-container {
+            position: relative;
+            perspective: 1000px;
+        }
+        .envelope {
+            position: relative;
+            width: 250px;
+            height: 150px;
+            background-color: #9f2fd3;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transform-style: preserve-3d;
+            transition: transform 0.8s;
+        }
+        .flap {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 75px;
+            background-color: #7102a1;
+            clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+            transition: transform 0.5s ease-in-out;
+            transform-origin: top;
+        }
+        .message {
+            position: absolute;
+            width: 300px;
+            min-height: 500px;
+            max-height: 200%;
+            background-color: #fff;
+            border-radius: 2px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.341);
+            text-align: center;
+            font-size: 1.2em;
+            padding: 10px;
+            opacity: 0;
+            transform: translateY(50px) scale(0.9);
+            transition: transform 0.5s ease-in-out, opacity 0.5s;
+            overflow-y: scroll;
+        }
+        .message::-webkit-scrollbar{
+            width: 1px;
+        }
+        
+        .title{
+            margin: 10px;
+            margin-bottom: 20px;
+            font-size: 30px;
+        }
+
+        .video1, .video2{
+            border-radius: 50px;
+            transform: rotate(2deg);
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.363);
+        }
+
+        .video2{
+            transform: rotate(-2deg);
+        }
+
+        .foto, .foto2, .foto3, .foto4{
+            margin-top: 30px;
+            margin-bottom: -40px;
+            width: 250px;
+            height: 250px;
+            border-radius: 5px;
+            transform: rotate(10deg);
+            object-fit: cover;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.363);
+        }
+
+        .foto2{
+            transform: rotate(-10deg);
+            margin-bottom: 20px;
+        }
+
+        .foto4{
+            width: 300px;
+            height: 200px;
+            transform: rotate(-10deg);
+            margin-bottom: 20px;
+        }
+
+        .heart {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30px;
+            height: 30px;
+            background-color: #b407f3;
+            clip-path: path('M24.8,4.2c-3.2-3.2-8.4-3.2-11.6,0l-1.2,1.2L10.8,4.2C7.6,1,2.4,1,0,4.2c-3.2,3.2-3.2,8.4,0,11.6l1.2,1.2l10.8,10.8l10.8-10.8l1.2-1.2C28,12.6,28,7.4,24.8,4.2z');
+            transition: opacity 0.5s;
+        }
+        .envelope.open {
+            transform: rotateY(180deg);
+        }
+        .envelope.open .flap {
+            transform: rotateX(-180deg);
+        }
+        .envelope.open .message {
+            opacity: 1;
+            transform: translateY(0px) rotateY(180deg) scale(1);
+        }
+        .envelope.open .heart {
+            opacity: 0;
+        }
+        .heart-container {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .floating-heart {
+            position: absolute;
+            bottom: -30px;
+            width: 20px;
+            height: 20px;
+            background-color: rgb(212, 73, 254);
+            clip-path: path('M24.8,4.2c-3.2-3.2-8.4-3.2-11.6,0l-1.2,1.2L10.8,4.2C7.6,1,2.4,1,0,4.2c-3.2,3.2-3.2,8.4,0,11.6l1.2,1.2l10.8,10.8l10.8-10.8l1.2-1.2C28,12.6,28,7.4,24.8,4.2z');
+            animation: float 5s linear infinite;
+        }
+        @keyframes float {
+            0% {
+                transform: translateY(0) scale(0.8);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) scale(1.2);
+                opacity: 0;
+            }
+        }
+        .floating-heart {
+            min-width: 30px;
+            min-height: 30px;
+            overflow: hidden;
+        }
+    </style>
+    <script>
+        function toggleEnvelope() {
+            document.querySelector('.envelope').classList.toggle('open');
+        }
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('floating-heart');
+            document.querySelector('.heart-container').appendChild(heart);
+
+            const size = Math.random() * 15 + 10;
+            heart.style.width = `${size}px`;
+            heart.style.height = `${size}px`;
+            heart.style.left = `${Math.random() * 100}%`;
+            heart.style.animationDuration = `${Math.random() * 6 + 5}s`;
+            heart.style.overflow = "hidden";
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+        setInterval(createHeart, 300);
+    </script>
+</head>
+<body>
+    <div class="heart-container"></div>
+    <div class="envelope-container">
+        <div class="envelope" onclick="toggleEnvelope()">
+            <div class="flap"></div>
+            <div class="message"><b class="title">Felices 4 meses, mi amorcito lindo ❤️</b>
+                <br>
+                <br> Hoy cumplimos cuatro meses juntos, y aunque pueda parecer poco tiempo en el reloj del mundo, para mí ha sido una de las etapas más hermosas y significativas de mi vida. No hay un solo día en el que no me sienta afortunado por tenerte a mi lado, por poder llamarte mi amor, por compartir contigo cada risa, cada mirada y cada sueño.
+                <br>
+                <img class="foto" src="fotos/foto1.jpg"/>
+                <br>
+                <img class="foto2" src="fotos/foto2.jpg"/>
+                <br>Desde que llegaste a mi vida, todo ha cambiado para mejor. Has llenado mis días de luz, de alegría y de un amor tan genuino que me cuesta describirlo con palabras. 
+                <br> 
+                <img class="foto3" src="fotos/foto3.jpg"/>
+                <img class="foto4" src="fotos/foto4.jpg"/>
+                <br> Contigo, los momentos simples se vuelven mágicos, las preocupaciones pesan menos y la felicidad se siente más real. Eres ese abrazo que calma, esa voz que me tranquiliza, esa mirada que me llena de paz.
+                <img class="foto" src="fotos/foto5.jpg"/>
+                <br>
+                <img class="foto2" src="fotos/foto6.jpg"/>
+                <br>
+                <br> En estos cuatro meses hemos vivido tantas cosas juntos, pequeños detalles que se han convertido en lo mejor de mi vida. Y lo más hermoso de todo es que esto es solo el comienzo de algo mucho más grande, algo que construimos y quiero que sigamos construyendo juntos.
+                <br>
+                <img class="foto3" src="fotos/foto7.jpg"/>
+                <img class="foto4" src="fotos/foto8.jpg"/>
+                <br>
+                <br>Gracias por cada gesto, por cada palabra de aliento, por cada te amo que me regalas con el corazón.
+                <br>
+                <br>
+                <br>
+                <video class="video1" width="250" height="460" controls>
+                    <source src="fotos/video1.mp4" type="video/mp4">
+                    Tu navegador no soporta el elemento de video.
+                </video>
+                <video class="video2" width="250" height="450" controls>
+                    <source src="fotos/video2.mp4" type="video/mp4">
+                    Tu navegador no soporta el elemento de video.
+                </video>
+                <br>
+                <br>
+                <br>Gracias por hacerme sentir querido, por aceptarme tal como soy y por darme un lugar especial en tu vida.
+                <br>
+                <br>Me encanta cada pequeño detalle de ti: tu sonrisa que ilumina mis días, tu voz que me llena de calma, tu forma de mirarme que hace que todo a mi alrededor desaparezca. Me enamora tu ternura, tu paciencia (O impaciencia a veces jajsjd), la manera en la que me haces sentir querido con cada palabra y cada gesto.
+                <br>
+                <img class="foto3" src="fotos/foto9.jpg"/>
+                <img class="foto4" src="fotos/foto10.jpg"/>
+                <br>
+                <br>Gracias por ser tú, exactamente como eres, porque así, exactamente, eres perfecta para mí.
+                <br>
+                <img class="foto" src="fotos/foto11.jpg"/>
+                <img class="foto2" src="fotos/foto12.jpg"/>
+                <img class="foto3" src="fotos/foto13.jpg"/>
+                <img class="foto4" src="fotos/foto14.jpg"/>
+                <img class="foto3" src="fotos/foto15.jpg"/>
+                <br>
+                <br>
+                <br>Feliz 4 meses, mi amor. No sé qué me depara el futuro, pero lo que sí sé es que quiero que sigas siendo parte de él. Te amo con todo mi corazón, y cada día que pasa, ese amor solo crece más.
+                <br> Te amo mucho. 💕
+                <br>
+                <br>Con todo mi amor
+                <br><b>CAMILO</b>
+            </div>
+            <div class="heart"></div>
+        </div>
+    </div>
+</body>
+</html>
