@@ -10,7 +10,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: darkred;
+            background: linear-gradient(black,purple, purple);
             overflow: hidden;
         }
         .envelope-container {
@@ -67,6 +67,7 @@
         }
         
         .title{
+            z-index: 100;
             margin: 10px;
             margin-bottom: 20px;
             font-size: 30px;
@@ -105,6 +106,16 @@
             margin-bottom: 20px;
         }
 
+        .kuromi{
+            position: absolute;
+            width: 300px; /* Ajusta el tamaño del sticker */
+            height: auto;
+            top: 100px; /* Ajusta la posición */
+            left: 40%;
+            transform: rotate(-15deg); /* Rotación para efecto de sticker */
+            z-index: -1; /* Coloca la imagen detrás del texto */
+            opacity: 0.5; /* Opcional: hacerla semi-transparente */
+        }
         .heart {
             position: absolute;
             top: 50%;
@@ -197,6 +208,8 @@
                 <img class="foto" src="fotos/foto1.jpg"/>
                 <br>
                 <img class="foto2" src="fotos/foto2.jpg"/>
+                <img class="kuromi" src="/fotos/kuromi.png">
+
                 <br>Desde que llegaste a mi vida, todo ha cambiado para mejor. Has llenado mis días de luz, de alegría y de un amor tan genuino que me cuesta describirlo con palabras. 
                 <br> 
                 <img class="foto3" src="fotos/foto3.jpg"/>
